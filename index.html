@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda Paloma y Eduardo - Valladolid - 30 Agosto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Para iconos -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url(); /* Imagen de alfombra roja */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.92); /* Opacidad para mejorar legibilidad */
+        }
+        .font-great-vibes {
+            font-family: 'Great Vibes', cursive;
+        }
+        .font-montserrat {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .card {
+            background-color: rgba(255, 245, 248, 0.98); /* Rosa pálido, casi blanco */
+            border: 2px solid #D8B4C8; /* Borde lavanda rosado suave */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+            color: #5D4037; /* Marrón suave para texto principal */
+        }
+        .map-container iframe {
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .btn-primary {
+            background-color: #B089A3; /* Tono lavanda rosado principal */
+            color: white;
+            padding: 0.85rem 1.75rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background-color: #9A7286;
+            transform: translateY(-2px);
+        }
+        .section-title {
+            font-family: 'Great Vibes', cursive;
+            color: #A7727D; /* Rosa profundo para títulos de sección */
+            font-size: 2.5rem; /* 40px */
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .section-title {
+                font-size: 3rem; /* 48px */
+            }
+        }
+        .text-accent {
+            color: #A7727D;
+        }
+        hr.fancy-hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(167, 114, 125, 0), rgba(167, 114, 125, 0.75), rgba(167, 114, 125, 0));
+            margin: 2.5rem 0;
+        }
+
+        /* Estilos para la cuenta atrás */
+        .countdown-container {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid #E0C8D5;
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+        .countdown-title {
+            font-family: 'Great Vibes', cursive;
+            color: #A7727D;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 15px;
+        }
+        .countdown-item {
+            background-color: #FDF6F8;
+            padding: 15px 10px;
+            border-radius: 10px;
+            border: 1px solid #EAD9E0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .countdown-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #B089A3;
+            line-height: 1;
+        }
+        .countdown-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: #7A5C57;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+        .countdown-container::before, .countdown-container::after {
+            content: '🌿';
+            font-size: 1.5rem;
+            color: #A7727D;
+            position: absolute;
+            opacity: 0.6;
+        }
+        .countdown-container::before { top: 10px; left: 10px; transform: rotate(-15deg); }
+        .countdown-container::after { bottom: 10px; right: 10px; transform: rotate(15deg); }
+
+        /* Estilos para la sección de hoteles */
+        .hotel-item {
+            background-color: #FFF9FB; /* Un blanco rosado muy sutil */
+            border: 1px solid #EAD9E0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .hotel-name {
+            font-weight: 600;
+            color: #A7727D;
+            font-size: 1.1rem;
+        }
+        .hotel-address {
+            font-size: 0.9rem;
+            color: #7A5C57;
+            margin-bottom: 0.5rem;
+        }
+        .hotel-contact a {
+            color: #B089A3;
+            text-decoration: none;
+            margin-right: 0.75rem;
+            transition: color 0.2s ease;
+        }
+        .hotel-contact a:hover {
+            color: #9A7286;
+        }
+        .hotel-contact i {
+            margin-right: 0.3rem;
+        }
+
+        /* Estilo para el botón flotante de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            width: auto;
+            height: 60px;
+            bottom: 60px;
+            right: 40px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px 0 15px;
+            text-decoration: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.05);
+            background-color: #128C7E;
+        }
+        .whatsapp-float i {
+            font-size: 30px;
+            margin-right: 10px;
+        }
+        .whatsapp-float span {
+            font-size: 16px;
+            font-weight: 600;
+            display: block;
+        }
+
+        .gift-option {
+            background-color: rgba(249, 250, 251, 0.8); /* bg-gray-100 con transparencia */
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            margin-top: 0.75rem;
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
+
+    <div class="overlay w-full h-full absolute top-0 left-0 z-0"></div>
+
+    <main class="card w-full max-w-4xl p-6 sm:p-10 rounded-xl shadow-2xl relative z-10 my-8">
+        <header class="text-center mb-10">
+            <h1 class="font-great-vibes text-6xl sm:text-8xl text-pink-700 mb-3" style="color: #A7727D;">Paloma & Eduardo</h1>
+            <p class="text-xl sm:text-2xl text-gray-600" style="color: #7A5C57;">¡Nos casamos y estamos deseando celebrarlo contigo!</p>
+            <p class="text-md sm:text-lg text-gray-500 mt-2" style="color: #9E857F;">30 de Agosto de 2025</p>
+        </header>
+
+        <!-- Sección Cuenta Atrás -->
+        <section id="countdown" class="text-center mb-10 relative">
+            <div class="countdown-container">
+                <h2 class="countdown-title">¡Falta muy poco!</h2>
+                <div class="countdown-grid">
+                    <div class="countdown-item">
+                        <div id="days" class="countdown-number">00</div>
+                        <div class="countdown-label">Días</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div id="hours" class="countdown-number">00</div>
+                        <div class="countdown-label">Horas</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div id="minutes" class="countdown-number">00</div>
+                        <div class="countdown-label">Minutos</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div id="seconds" class="countdown-number">00</div>
+                        <div class="countdown-label">Segundos</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="fancy-hr">
+
+        <!-- Sección Ceremonia -->
+        <section class="mb-10 text-center">
+            <h2 class="section-title mb-6">La Ceremonia</h2>
+            <p class="text-lg sm:text-xl mb-1">Uniremos nuestras vidas el <strong class="text-accent">Sábado, 30 de Agosto de 2025</strong> a las <strong class="text-accent">18:00 horas</strong> en la:</p>
+            <p class="font-semibold text-xl sm:text-2xl text-accent mb-1">
+                Parroquia de San Agustín
+            </p>
+            <p class="text-md sm:text-lg mb-3">(Convento de los Agustinos Filipinos)</p>
+            <p class="text-gray-500 text-sm" style="color: #9E857F;">
+                Paseo de Filipinos, 7, 47007 Valladolid
+            </p>
+        </section>
+
+        <hr class="fancy-hr">
+
+        <!-- Sección Banquete -->
+        <section id="banquete" class="mb-10 text-center">
+            <h2 class="section-title mb-6">El Banquete</h2>
+            <p class="text-lg sm:text-xl mb-1">Después de la ceremonia, celebraremos nuestro amor con una cena y fiesta en:</p>
+            <p class="font-semibold text-xl sm:text-2xl text-accent mb-1">
+                AC Hotel Palacio de Santa Ana by Marriott
+            </p>
+            <p class="text-gray-500 text-sm mb-4" style="color: #9E857F;">
+                Camino de la Flecha, s/n, 47197 Valladolid
+            </p>
+            <div class="map-container aspect-w-16 aspect-h-9">
+                 <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2980.019400405888!2d-4.76447208456535!3d41.62517597924239!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd476df58e753a0b%3A0x50A7439D9A2EC0F3!2sAC%20Hotel%20Palacio%20de%20Santa%20Ana%20by%20Marriott!5e0!3m2!1ses!2ses!4v1684320000000!5m2!1ses!2ses" 
+                    width="100%" 
+                    height="350" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Mapa al AC Hotel Palacio de Santa Ana">
+                </iframe>
+            </div>
+             <p class="text-center text-xs text-gray-500 mt-3" style="color: #9E857F;">
+                Haz clic en el mapa para obtener direcciones.
+            </p>
+        </section>
+        
+        <hr class="fancy-hr">
+        
+        <!-- Sección Alojamiento -->
+        <section id="accommodation" class="mb-10 text-center">
+            <h2 class="section-title mb-6">Alojamiento</h2>
+            <p class="text-md sm:text-lg mb-6 max-w-2xl mx-auto">
+                Pensando en vuestra comodidad, sobre todo para quienes viajáis desde fuera, el banquete se celebra en el AC Hotel Palacio de Santa Ana. El propio hotel nos ofrece una tarifa especial a la que podéis acceder desde este enlace:
+            </p>
+            <div class="max-w-2xl mx-auto text-left">
+                <div class="hotel-item">
+                    <div class="hotel-name">AC Hotel Palacio de Santa Ana by Marriott</div>
+                    <div class="hotel-address">Camino de la Flecha, s/n, 47197 Valladolid</div>
+                    <div class="hotel-contact">
+                        <a href="tel:+34983409920" target="_blank"><i class="fas fa-phone"></i>Llamar</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=AC+Hotel+Palacio+de+Santa+Ana+by+Marriott+Valladolid" target="_blank"><i class="fas fa-map-marker-alt"></i>Ver Mapa</a>
+                        <a href="https://www.marriott.com/es/event-reservations/reservation-link.mi?id=1749126718264&key=GRP&guestreslink2=true&app=resvlink" target="_blank" class="font-bold"><i class="fas fa-bed"></i>Reservar con tarifa especial</a>
+                    </div>
+                    <p class="text-center text-sm font-semibold text-red-600 mt-3">
+                        (Precio especial reservando antes del 1 de agosto)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="fancy-hr">
+
+        <!-- Sección Regalo -->
+        <section id="gift-list" class="mb-10 text-center">
+            <h2 class="section-title mb-6">Regalo de Boda</h2>
+            <p class="text-md sm:text-lg mb-4 max-w-2xl mx-auto">
+                Vuestra presencia es nuestro mayor regalo. Si aún así deseáis tener un detalle con nosotros, os facilitamos nuestro número de cuenta o, si lo preferís, por Bizum.
+            </p>
+            <div class="space-y-4">
+                <div class="gift-option">
+                    <span class="font-semibold text-accent">IBAN:</span>
+                    <span class="font-montserrat tracking-wider"> ES63 1465 0200 21 1734016759</span>
+                </div>
+                <div class="gift-option">
+                    <span class="font-semibold text-accent">Bizum:</span>
+                    <span class="font-montserrat tracking-wider"> 669 68 97 39</span>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 mt-4" style="color: #9E857F;">¡Muchas gracias de todo corazón!</p>
+        </section>
+
+        <footer class="text-center mt-12">
+            <p class="font-great-vibes text-4xl sm:text-5xl" style="color: #A7727D;">¡Contando los días para celebrarlo juntos!</p>
+            <p class="font-great-vibes text-3xl sm:text-4xl mt-2" style="color: #A7727D;">Paloma & Eduardo</p>
+        </footer>
+    </main>
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/34669689739?text=Hola!%20Quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Paloma%20y%20Eduardo."
+       class="whatsapp-float"
+       target="_blank"
+       aria-label="Confirmar asistencia por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span>Confirma tu asistencia</span>
+    </a>
+
+    <script>
+        // --- Script para la Cuenta Atrás ---
+        const countdownDate = new Date("August 30, 2025 18:00:00").getTime();
+
+        const countdownFunction = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown").innerHTML = "<h2 class='countdown-title text-2xl'>¡El gran día ha llegado!</h2>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
+
+
